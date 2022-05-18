@@ -1,4 +1,6 @@
 import { Shopify } from "@shopify/shopify-api";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 export const getAllProducts = async (req, res) => {
   const session = await Shopify.Utils.loadCurrentSession(req, res, true);
