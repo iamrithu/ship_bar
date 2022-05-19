@@ -12,6 +12,12 @@ model shipBars {
   uuid        String   @unique @db.VarChar(255)
   name        String
   content     String
+  background  String
+  position    String
+  fontColor   String
+  fontFamily  String
+  fontSize    String
+  isActive    Boolean  @default(false)
   createdAt   DateTime @default(now())
   shopDetails Shops    @relation(fields: [shop], references: [name])
   shop        String
