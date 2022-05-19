@@ -19,7 +19,39 @@ export const createShipBar = async (req, res) => {
       data: req.body,
       include: { shopDetails: true },
     });
-    res.status(201).json({ shipBar });
+    res.status(201).json(shipBar);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+export const updateShipBar = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const shipBar = await prisma.shipBars.update({
+      where: {
+        uuid: Number(id),
+      },
+      data: req.body,
+      include: { shopDetails: true },
+    });
+    res.status(201).json(shipBar);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+export const deleteShipBar = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const shipBar = await prisma.shipBars.delete({
+      where: {
+        uuid: id,
+      },
+
+      include: { shopDetails: true },
+    });
+    res.status(201).json(shipBar);
   } catch (error) {
     res.status(500).json({ error });
   }

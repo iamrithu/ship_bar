@@ -4,6 +4,12 @@ CREATE TABLE "shipBars" (
     "uuid" VARCHAR(255) NOT NULL,
     "name" TEXT NOT NULL,
     "content" TEXT NOT NULL,
+    "background" TEXT NOT NULL,
+    "position" TEXT NOT NULL,
+    "fontColor" TEXT NOT NULL,
+    "fontFamily" TEXT NOT NULL,
+    "fontSize" TEXT NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "shop" TEXT NOT NULL,
 
