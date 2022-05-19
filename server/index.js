@@ -8,7 +8,7 @@ import "dotenv/config";
 import applyAuthMiddleware from "./middleware/auth.js";
 import verifyRequest from "./middleware/verify-request.js";
 
-import { getAllProducts } from "./controller/product.js";
+import shipBarRouter from "./router/router.js";
 const USE_ONLINE_TOKENS = true;
 const TOP_LEVEL_OAUTH_COOKIE = "shopify_top_level_oauth";
 
@@ -53,6 +53,8 @@ export async function createServer(
 
   applyAuthMiddleware(app);
 
+  app.use("/", shipBarRouter);
+
   app.post("/webhooks", async (req, res) => {
     try {
       await Shopify.Webhooks.Registry.process(req, res);
@@ -64,13 +66,6 @@ export async function createServer(
       }
     }
   });
-  // app.get("/login", async (req, res) => {
-  //   const { shop } = req.query;
-  //   const session = await Shopify.Utils.loadCurrentSession(req, res, true);
-  //   console.log(shop);
-  //   console.log(session);
-  // });
-  app.get("/products-count", verifyRequest(app), getAllProducts);
 
   app.post("/graphql", verifyRequest(app), async (req, res) => {
     try {
